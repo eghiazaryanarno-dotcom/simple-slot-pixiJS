@@ -89,16 +89,6 @@ export async function createFooter(background, startSpin, initialBet) {
   spinButton.y = footerHeight / 2 - 5;
   spinButton.on("pointerdown", () => startSpin());
 
-  const turboSpinStyle = new TextStyle({
-    fill: "#ffffff",
-    fontSize: 19,
-    fontWeight: "700",
-    dropShadow: true,
-    dropShadowColor: "#3d3d3dff",
-    dropShadowBlur: 2,
-    dropShadowDistance: 2,
-  });
-
   const playMusicTexture = await Assets.load("playMusic.png");
   const muteMusicTexture = await Assets.load("muteMusic.png");
   const playMusic = new Sprite(playMusicTexture);
