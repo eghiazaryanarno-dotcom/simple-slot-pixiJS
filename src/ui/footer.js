@@ -99,16 +99,6 @@ export async function createFooter(background, startSpin, initialBet) {
     dropShadowDistance: 2,
   });
 
-  const turboSpinText = new Text({
-    text: "HOLD SPACE FOR TURBO SPIN",
-    style: turboSpinStyle,
-  });
-  turboSpinText.anchor.set(0.5);
-  turboSpinText.x = bgW / 2;
-  turboSpinText.y = footerHeight / 2;
-  turboSpinText.alpha = 0.8;
-  footerContainer.addChild(turboSpinText);
-
   const playMusicTexture = await Assets.load("playMusic.png");
   const muteMusicTexture = await Assets.load("muteMusic.png");
   const playMusic = new Sprite(playMusicTexture);
