@@ -1,6 +1,6 @@
 import { Application, Assets, Sprite, Texture, BlurFilter, Graphics } from "pixi.js";
 import { createBackground } from "../ui/background.js";
-import { createFooter } from "../ui/Footer.js";
+import { createFooter } from "../ui/footer.js";
 import { createGrid } from "../slot/createGrid.js";
 import { createReels } from "../slot/createReels.js";
 import { SLOT_TEXTURES_URLS } from "../constants/slotTextures.js";
