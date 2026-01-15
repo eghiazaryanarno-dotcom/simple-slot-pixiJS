@@ -13,6 +13,7 @@
     "@pixi/filter-glow": "^5.2.1",
     "@pixi/layout": "^3.2.0",
     "@pixi/sound": "^6.0.1",
+    "pixi-layout": "^0.1.14",
     "pixi.js": "^8.8.1"
   },
   "devDependencies": {

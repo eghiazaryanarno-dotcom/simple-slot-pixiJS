@@ -11,7 +11,7 @@ export async function createFooter(background, startSpin, initialBet) {
 
   const footer = new Graphics()
     .rect(0, 0, bgW, footerHeight)
-    .fill({ color: "white", alpha: 0.15 });
+    .fill({ color: "black", alpha: 0.55 });
   footerContainer.addChild(footer);
 
   const labelStyle = new TextStyle({
