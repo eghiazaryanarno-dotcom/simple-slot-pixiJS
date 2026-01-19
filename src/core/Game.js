@@ -1,11 +1,17 @@
-import { Application, Assets, Sprite, Texture, BlurFilter, Graphics } from "pixi.js";
+import {
+  Application,
+  Assets,
+  Sprite,
+  Texture,
+  BlurFilter
+} from "pixi.js";
 import { createBackground } from "../ui/background.js";
 import { createFooter } from "../ui/footer.js";
 import { createGrid } from "../slot/createGrid.js";
 import { createReels } from "../slot/createReels.js";
 import { SLOT_TEXTURES_URLS } from "../constants/slotTextures.js";
 import { generateReelResult } from "./GenerateReelResult.js";
-import { winCheck } from "./winChecker.js";
+import { winCheck, clearWinLines } from "./winChecker.js";
 import { GAME_SETTINGS } from "../constants/gameSettings.js";
 
 export const STATES = {
@@ -33,6 +39,7 @@ export async function initGame() {
   const blurFilter = new BlurFilter();
   blurFilter.strength = 4;
   mainBackground.filters = [blurFilter];
+
   app.stage.addChild(mainBackground);
 
   const slotTextures = textureUrls.map((url) => Texture.from(url));
@@ -45,7 +52,7 @@ export async function initGame() {
         const winAmount = winCheck(
           result,
           gridContainer,
-          GAME_SETTINGS.currentBeT
+          GAME_SETTINGS.currentBeT,
         );
         if (winAmount > 0) {
           GAME_SETTINGS.balance += winAmount;
@@ -56,25 +63,21 @@ export async function initGame() {
     }
   };
 
-
   const initialResult = generateReelResult();
+
   const reelController = createReels(
     app,
     slotTextures,
     columns,
     initialResult,
-    handleStateChange
+    handleStateChange,
   );
 
   const handleSpin = () => {
     if (reelController.getCurrentState() !== STATES.IDLE) return;
     if (GAME_SETTINGS.balance < GAME_SETTINGS.currentBeT) return;
 
-    gridContainer.children.forEach((child) => {
-      if (child instanceof Graphics || child.label === "winLine") {
-        gridContainer.removeChild(child);
-      }
-    });
+    clearWinLines(gridContainer);
 
     GAME_SETTINGS.balance -= GAME_SETTINGS.currentBeT;
     footer.updateBalance(GAME_SETTINGS.balance);
@@ -84,7 +87,7 @@ export async function initGame() {
   const footer = await createFooter(
     uiBackground,
     handleSpin,
-    GAME_SETTINGS.currentBeT
+    GAME_SETTINGS.currentBeT,
   );
   footer.updateBalance(GAME_SETTINGS.balance);
 
